@@ -31,7 +31,7 @@ then
 else
 if [ $WFLAG  == "true" ]
 then
-   printf "Wifi AP registered on WLAN0\n"
+   printf "Wifi access points registered on WLAN0\n"
    #Scans the WLAN0 and gets only the WIFI name with the ESSID. Then the ESSID is taken away with sed and regex
    W=$(sudo iwlist wlan0 scan | grep ESSID | sed -e 's/\<ESSID\>//g') 
    #Makes the output of the command a string. Before doing this $W size is 864, after $WIFICONS size is 363
@@ -45,13 +45,12 @@ then
    do
       echo "$element"
    done
-   
-   select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) make install; break;;
-        No ) exit;;
-    esac
-    done
+   printf '\n'
+   CHOICE="NONE"
+   while [ "$(echo $T | grep "$CHOICE")" = "" ]; do
+      read -p "Access point: " CHOICE
+      echo $CHOICE
+   done
     
 fi
 fi
