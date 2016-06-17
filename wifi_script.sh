@@ -58,14 +58,19 @@ then
    echo $PASSKEY
    
    printf "\n"
+   #Outputs the contents of the supplicant file to the FILE variable
    FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
+   #Replaces the newlines of the output FILE var and gets rid of everything after and including network
    PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
-   PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}" 
+   #Writes the new contents of the final
+   PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
+   #replaces the ~ with \n 
    PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
+   #Outputs to the file thus changes the configurations
    printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
    cat ./test.txt
 fi
 fi
-
+#restarts the network card to solidify the configurations
 sudo ifdown wlan0
 sudo ifup wlan0
