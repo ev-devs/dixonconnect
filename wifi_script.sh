@@ -1,6 +1,7 @@
 #!/bin/bash
 # Proper header for a Bash script.
 export PATH=$PATH:/home/pi/programmaticWifi
+sudo ifdown wlan0
 #Checks the network links to a given computer 
 LINKS=$(ip link show | grep 'state UP')
 #Defines and sets flags for eth0 and wlan0
@@ -21,10 +22,6 @@ then
 fi
 
 
-
-
-
-
 if [ $EFLAG  == "true" ]
 then
    printf "Ethernet registered on eth0 - Auto-connect"
@@ -40,18 +37,35 @@ then
    T=$(echo "$WIFICONS" | tr ':' '\n' | sort -u | tr '\n' '~')
    #Changes the internal field separator to be '~'
    IFS='~' read -r -a array <<< "$T"
-  
+   #lists the access points
    for element in "${array[@]}"
    do
       echo "$element"
    done
    printf '\n'
+   #defines the variables to hold the access points and a password
    CHOICE="NONE"
+   PASSKEY="NONE"
+   #prompts the user to enter a proper SSID
    while [ "$(echo $T | grep "$CHOICE")" = "" ]; do
       read -p "Access point: " CHOICE
       echo $CHOICE
    done
-    
+   #prompts for the passkey for the ssid
+   echo "Passkey: "
+   #-s hides the typed characters
+   read -s PASSKEY
+   echo $PASSKEY
+   
+   printf "\n"
+   FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
+   PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
+   PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}" 
+   PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
+   printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
+   cat ./test.txt
 fi
 fi
 
+sudo ifdown wlan0
+sudo ifup wlan0
