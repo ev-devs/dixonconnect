@@ -12,11 +12,15 @@ function PASSKEYSTATUS {
       then
          if [ "$(echo "$element" | grep "\"$CHOICE\"" | grep "on")" != "" ]
          then
-            #prompts for the passkey for the ssid
-			echo "Passkey: "
-			#-s hides the typed characters
-			read -s PASSKEY
-			echo $PASSKEY
+            ANSWER="n"
+            while ["$ANSWER" = "n"]; do
+               #prompts for the passkey for the ssid
+			   echo "Passkey: "
+			   #-s hides the typed characters
+			   read -s PASSKEY
+			   echo "Is this correct: $PASSKEY (Y/n)"
+			   read ANSWER
+			done
 	     fi
          break 
       fi
@@ -47,7 +51,7 @@ while [ "$(echo $WIFICONS | grep "$CHOICE")" = "" ]; do
 done
 #Calls the function to handle password entry
 PASSKEYSTATUS array CHOICE
-
+echo $PASSKEY
 if false  
 then 
 printf "\n"
