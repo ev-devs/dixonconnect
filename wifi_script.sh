@@ -1,6 +1,5 @@
 #!/bin/bash
 # Proper header for a Bash script.
-export PATH=$PATH:/home/pi/programmaticWifi
 #Checks the network links to a given computer. If there is an etherney connected then the eth0 interface will register as up. 
 #Same with wifi where if there is a wifi connection the wlan0 interface will register as up.
 #This is primarily used for ethernet as if there are no direct connections on wlan0 BUT if there are avilable networks
@@ -33,7 +32,6 @@ if [ $WFLAG  == "true" ]
 then
    printf "Wifi access points registered on WLAN0\n"
    #Scans the WLAN0 and gets only the WIFI name with the ESSID. Then the ESSID is taken away with sed and regex
-   #W=$(sudo iwlist wlan0 scan | grep 'ESSID\|Quality\|Encryption' | sed -e 's/\<ESSID\>//g') 
    W=$(sudo iwlist wlan0 scan | grep 'ESSID\|Quality\|Encryption' | tr '=' 'x') 
    W="${W//Qualityx/=Sig\ Strength\ :}"
    #Makes the output of the command a string. Before doing this $W size is 864, after $WIFICONS size is 363
@@ -48,5 +46,4 @@ then
       echo "$element"
    done
 fi
-#restarts the network card to solidify the configurations
-#Second script states what is your current connections are
+./wifi_con.sh
