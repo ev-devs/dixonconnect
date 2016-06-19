@@ -13,12 +13,12 @@ function PASSKEYSTATUS {
          if [ "$(echo "$element" | grep "\"$CHOICE\"" | grep "on")" != "" ]
          then
             ANSWER="n"
-            while ["$ANSWER" = "n"]; do
+            while [ "$ANSWER" = "n" ]; do
                #prompts for the passkey for the ssid
 			   echo "Passkey: "
 			   #-s hides the typed characters
 			   read -s PASSKEY
-			   echo "Is this correct: $PASSKEY (Y/n)"
+			   echo "Is this correct (y/n): $PASSKEY"
 			   read ANSWER
 			done
 	     fi
@@ -51,12 +51,11 @@ while [ "$(echo $WIFICONS | grep "$CHOICE")" = "" ]; do
 done
 #Calls the function to handle password entry
 PASSKEYSTATUS array CHOICE
-echo $PASSKEY
-if false  
-then 
+
 printf "\n"
 #Outputs the contents of the supplicant file to the FILE variable
-FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
+#FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
+FILE=$(sudo cat ./test.txt)
 #Replaces the newlines of the output FILE var and gets rid of everything after and including network
 PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
 #Writes the new contents of the final
@@ -65,7 +64,8 @@ PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
 PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
 #printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
-#cat ./test.txt
+printf "$PREVCONTENT" > ./test.txt
+cat ./test.txt
 #sudo ifdown wlan0
 #sudo ifup wlan0
-fi
+
