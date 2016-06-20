@@ -26,7 +26,7 @@ function PASSKEYSTATUS {
       fi
    done
 }
-#sudo ifdown wlan0
+ifdown wlan0
 
 #Get the list of connections, taking only the name and whether or not we need a password. The rest of the commands after the grep are for parsing.
 #the first sed gets rid of the string "Encryption key", the tr makes any : to an x, the next sed gets rid of "ESSIDx"
@@ -54,8 +54,8 @@ PASSKEYSTATUS array CHOICE
 
 printf "\n"
 #Outputs the contents of the supplicant file to the FILE variable
-#FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
-FILE=$(sudo cat ./test.txt)
+FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
+echo $FILE
 #Replaces the newlines of the output FILE var and gets rid of everything after and including network
 PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
 #Writes the new contents of the final
@@ -63,9 +63,8 @@ PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
 #replaces the ~ with \n 
 PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
-#printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
-printf "$PREVCONTENT" > ./test.txt
-cat ./test.txt
-#sudo ifdown wlan0
-#sudo ifup wlan0
+echo HERE
+printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
+cat /etc/wpa_supplicant/wpa_supplicant.conf
+ifup wlan0
 
