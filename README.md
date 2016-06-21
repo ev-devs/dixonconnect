@@ -22,3 +22,5 @@ The scripts invoke commands only priveleged users are allowed to un as they acce
 `$ sudo ./wifi_script.sh`
 
 `$ sudo ./wifi_con.sh`
+
+##Fine details (what does it actually do???)
