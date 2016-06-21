@@ -57,6 +57,9 @@ Connects the user to the specified access point.
 
 ###wifi_cur.sh
 
-**THIS SECTION IS CURRENTLY UNDER CONSTRUCTION. FUNCTIONALLITY WILL BE MOVED TO THE ABOVE SCRIPT.**
+**THIS SECTION IS CURRENTLY UNDER CONSTRUCTION. SOME FUNCTIONALITY WILL BE MOVED TO THE ABOVE SCRIPT.**
 
-####Relating to Wi-Fi, this script just displayes the current connection.
+####wlan0
+Relating to Wi-Fi, this script just displays the current connection.
+####eth0
+Tell if connected to ethernet, if not then allow user to choose to connect to either.
