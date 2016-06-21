@@ -55,7 +55,7 @@ Relating to ethernet, this script tells the user that ethernet is used by defaul
 ####Summary (TL;DR for the lazies)
 Connects the user to the specified access point.
 
-###wifi_cur.sh
+###**wifi_cur.sh** 
 ####wlan0
 Relating to Wi-Fi, this script just displays the current connection.
 ####eth0
