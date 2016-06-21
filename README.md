@@ -6,7 +6,7 @@ If the use is for Raspberry Pi then all dependencies are met. Otherwise, the fun
 
 1. Unix based (preferably Linux, and even better if it is a Debian based disto)
 2. Pre-downloaded WPA Supplicant.
-..* The script writes to the wpa_supplicant.conf file locatedin `/etc/wpa_supplicant/wpa_supplicant.conf`
+    * The script writes to the wpa_supplicant.conf file locatedin `/etc/wpa_supplicant/wpa_supplicant.conf`
 2. Pre-downloaded WPA Supplicant.
 ##How to download:
 Clone this repo and change the directory to the repo itself. Below are the commands to do so:
