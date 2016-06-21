@@ -4,9 +4,9 @@ Connect to the wifi using bash scripts. This functionality allows for the user t
 ##Dependencies
 If the use is for Raspberry Pi then all dependencies are met. Otherwise, the functioning OS of the user must meet the following:
 
-1. Linux (preferably a Debian based disto)
+1. Unix based (preferably Linux, and even better if it is a Debian based disto)
 2. Pre-downloaded WPA Supplicant. C
-..*The script writes to the wpa_supplicant.conf file locatedin `/etc/wpa_supplicant/wpa_supplicant.conf`
+⋅⋅*The script writes to the wpa_supplicant.conf file locatedin `/etc/wpa_supplicant/wpa_supplicant.conf`
 
 ##How to download:
 Clone this repo and change the directory to the repo itself. Below are the commands to do so:
