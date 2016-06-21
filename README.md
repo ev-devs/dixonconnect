@@ -88,7 +88,7 @@ $ sudo ./wifi_cur.sh
 Current Wi-Fi connection: "EVBosses"
 ```
 ##Possible bugs and pitfalls (make note of these)
-* Forthe wifi_con.sh I have no tested the flipping between Ethernet and Wi-Fi on the Raspberry Pi. Will do so when I have access.
+* For the wifi_con.sh I have not tested the flipping between Ethernet and Wi-Fi on the Raspberry Pi. Will do so when I have access to the Raspberry Pi
 
 * Though the script is built to filter out duplicates it is not built to filter out duplicate routers. IF there are multiple routers in one area it will list multiples of the same ESSID. 
 Currently working on a fix.
