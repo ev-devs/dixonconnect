@@ -26,7 +26,29 @@ function PASSKEYSTATUS {
       fi
    done
 }
+#Brings down the wlan0 interface
 ifdown wlan0
+#declares and initalizes the EFLAG
+EFLAG="false"
+#Automatic answer is "y"(yes) just in case an ethernet is not detected
+ANS="y"
+#Checks to see if there is an ethernet connected. By default ethernet will distribute the connection over Wi-Fi if it is connected.
+ETHLINK=$(ip link show | grep 'eth0' | grep 'state UP')
+#If there is an ethernet connected then do the following
+if [ "$ETHLINK" != "" ] 
+then
+  while [ ANS != "y" -o ANS != "n" ]; do
+     printf "Ethernet is default connection. Use wifi? (y/n): "
+  done
+  #Bring the ethernet interface down if the user wants to use Wi-Fi over ethernet
+  if [ "$ANS" = "y" ] 
+  then
+     ifconfig eth0 down
+  fi
+fi
+#If there is no ethernet  OR if the user would rather use Wi-Fi then execute the following
+if [ "$ANS" = "y" ] 
+then
 
 #Get the list of connections, taking only the name and whether or not we need a password. The rest of the commands after the grep are for parsing.
 #the first sed gets rid of the string "Encryption key", the tr makes any : to an x, the next sed gets rid of "ESSIDx"
@@ -47,7 +69,6 @@ IFS=':' read -a array <<< "$WIFICONS"
 #prompts the user to enter a proper SSID
 while [ "$(echo $WIFICONS | grep "$CHOICE")" = "" ]; do
    read -p "Access point: " CHOICE
-   #printf "\nYour choice: $CHOICE"
 done
 #Calls the function to handle password entry
 PASSKEYSTATUS array CHOICE
@@ -66,3 +87,4 @@ printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
 #cat /etc/wpa_supplicant/wpa_supplicant.conf
 ifup wlan0
 
+fi

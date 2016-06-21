@@ -46,20 +46,17 @@ Displays Wi-Fi names and signal strengths. If an ethernet is connected it will t
 
 ###wifi_con.sh
 ####wlan0
-Relating to Wi-Fi, the script prompts the user to enter an access point as displayed from the previous script. When entered the user should enter the correct password, assuming one is needed. When the correct
+Relating to Wi-Fi, the script prompts the user to enter an access point as displayed from the previous script. When done entering the Wi-Fi name, the user should enter the correct password, assuming one is needed. When the correct
 password is entered then given a few seconds, the Wi-Fi network card will be reset and then connected to the chosen network
 
 ####eth0
-Relating to ethernet, this script does nothing as of now though some of the functionality of the wifi_cur.sh will be moved into this script meaning that eth0 configurations will be ready in wifi_con.sh.
+Relating to ethernet, this script tells the user that ethernet is used by default and gives them the option to switch between ethernet and Wi-Fi IF they want to.
 
 ####Summary (TL;DR for the lazies)
 Connects the user to the specified access point.
 
 ###wifi_cur.sh
-
-**THIS SECTION IS CURRENTLY UNDER CONSTRUCTION. SOME FUNCTIONALITY WILL BE MOVED TO THE ABOVE SCRIPT.**
-
 ####wlan0
 Relating to Wi-Fi, this script just displays the current connection.
 ####eth0
-Tell if connected to ethernet, if not then allow user to choose to connect to either.
+Tell if connected to ethernet.
