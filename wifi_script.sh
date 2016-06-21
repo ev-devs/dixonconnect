@@ -26,10 +26,10 @@ fi
 if [ $EFLAG  == "true" ]
 then
    printf "Ethernet registered on eth0\n\n"
-else
+fi
 if [ $WFLAG  == "true" ]
 then
-   printf "Wifi access points registered on WLAN0\n"
+   printf "Wifi access points registered on wlan0\n"
    #Scans the WLAN0 and gets only the WIFI name with the ESSID. Then the ESSID is taken away with sed and regex
    W=$(sudo iwlist wlan0 scan | grep 'ESSID\|Quality\|Encryption' | tr '=' 'x') 
    W="${W//Qualityx/=Quality:}"
@@ -46,4 +46,4 @@ then
       echo "$element"
    done
 fi
-fi
+
