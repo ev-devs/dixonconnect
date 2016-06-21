@@ -23,6 +23,8 @@ The scripts invoke commands only priveleged users are allowed to run as they acc
 
 `$ sudo ./wifi_con.sh`
 
+`$ sudo ./wifi_con.sh`
+
 ##Fine details (what does it actually do???)
 Great question actually. As stated before, these three scripts are used to provide details and configure the network connections around you. Below are the details and functionality of each. Keep in mind the
 following acronyms on our journey through the world of wireless and wired networks
@@ -85,3 +87,9 @@ Tell if connected to ethernet.
 $ sudo ./wifi_cur.sh
 Current Wi-Fi connection: "EVBosses"
 ```
+##Possible bugs and pitfalls (make note of these)
+*Forthe wifi_con.sh I have no tested the flipping between Ethernet and Wi-Fi on the Raspberry Pi. Will do so when I have access.
+*Though the script is built to filter out duplicates it is not built to filter out duplicate routers. IF there are multiple routers in one area it will list multiples of the same ESSID. 
+Currently working on a fix.
+*Recovering ethernet connection after switching from ethernet to Wi-Fi via the wifi_con.sh is not yet configured. To do so would require running "ifconfig eth0 up" which is not in any of the scripts yet.
+
