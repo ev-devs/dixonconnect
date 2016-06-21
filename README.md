@@ -92,4 +92,6 @@ Current Wi-Fi connection: "EVBosses"
 *Though the script is built to filter out duplicates it is not built to filter out duplicate routers. IF there are multiple routers in one area it will list multiples of the same ESSID. 
 Currently working on a fix.
 *Recovering ethernet connection after switching from ethernet to Wi-Fi via the wifi_con.sh is not yet configured. To do so would require running "ifconfig eth0 up" which is not in any of the scripts yet.
+*At times, displaying the access points over the wlan0 is slower than other times. 
+*Displaying the difference in strength between Wi-Fi and ethernet strength is not yet configured.
 
