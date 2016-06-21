@@ -4,10 +4,11 @@ Connect to the wifi using bash scripts. This functionality allows for the user t
 ##Dependencies
 If the use is for Raspberry Pi then all dependencies are met. Otherwise, the functioning OS of the user must meet the following:
 
-1. Unix based (preferably Linux, and even better if it is a Debian based disto)
+1. Unix based OS(preferably Linux, and even better if it is a Debian based disto)
 2. Pre-downloaded WPA Supplicant.
-    * The script writes to the wpa_supplicant.conf file locatedin `/etc/wpa_supplicant/wpa_supplicant.conf`
-2. Pre-downloaded WPA Supplicant.
+    * The `wifi_con.sh` script writes to the wpa_supplicant.conf file locatedin `/etc/wpa_supplicant/wpa_supplicant.conf`, thus the user NEEDS this file already within.
+
+
 ##How to download:
 Clone this repo and change the directory to the repo itself. Below are the commands to do so:
 
@@ -15,5 +16,9 @@ Clone this repo and change the directory to the repo itself. Below are the comma
 
 `$ cd programmaticWifi`
 
-##How to use:
-The 
+##How to run:
+The scripts invoke commands only priveleged users are allowed to un as they access sensitive files on the system. Thus, in order to run the scripts run them with sudo priveleges as such:
+
+`$ sudo ./wifi_script.sh`
+
+`$ sudo ./wifi_con.sh`
