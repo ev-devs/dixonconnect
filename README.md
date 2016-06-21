@@ -50,6 +50,10 @@ $ sudo ./wifi_script.sh
 Ethernet registered on eth0
 
 Wi-Fi access points registered on wlan0
+
+Quality:67/70 Signal-level:-43 dBm Encryption key:off ESSID:"EVGuests" 
+Quality:68/70 Signal-level:-42 dBm Encryption key:on ESSID:"EVEmployees" 
+Quality:68/70 Signal-level:-42 dBm Encryption key:on ESSID:"EVBosses" 
 ```
 ###wifi_con.sh
 #####wlan0
@@ -62,8 +66,22 @@ Relating to ethernet, this script tells the user that ethernet is used by defaul
 #####Summary (TL;DR for the lazies)
 Connects the user to the specified access point.
 
-###**wifi_cur.sh** 
+#####Example run
+```
+$ sudo ./wifi_con.sh
+Access point: EVBosses
+Passkey:
+Is this correct (y/n): wedembosse$
+y
+```
+
+###wifi_cur.sh 
 #####wlan0
 Relating to Wi-Fi, this script just displays the current connection.
 #####eth0
 Tell if connected to ethernet.
+#####Example run
+```
+$ sudo ./wifi_cur.sh
+Current Wi-Fi connection: "EVBosses"
+```
