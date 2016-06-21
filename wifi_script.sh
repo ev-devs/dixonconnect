@@ -26,14 +26,14 @@ fi
 if [ $EFLAG  == "true" ]
 then
    printf "Ethernet registered on eth0\n\n"
-fi
-
+else
 if [ $WFLAG  == "true" ]
 then
    printf "Wifi access points registered on WLAN0\n"
    #Scans the WLAN0 and gets only the WIFI name with the ESSID. Then the ESSID is taken away with sed and regex
    W=$(sudo iwlist wlan0 scan | grep 'ESSID\|Quality\|Encryption' | tr '=' 'x') 
-   W="${W//Qualityx/=Sig\ Strength\ :}"
+   W="${W//Qualityx/=Quality:}"
+   W="${W//Signal\ levelx/Signal-level:}"
    #Makes the output of the command a string. Before doing this $W size is 864, after $WIFICONS size is 363
    WIFICONS=$(echo $W)
    #Spits out $WIFICONS, takes all the ':' and makes them '\n', sorts by unique and gets rid of duplicates, replaces '\n' with '~'
@@ -46,4 +46,4 @@ then
       echo "$element"
    done
 fi
-./wifi_con.sh
+fi
