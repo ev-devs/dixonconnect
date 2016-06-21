@@ -3,7 +3,7 @@
 #defines the variables to hold the access points and a password
 CHOICE="NONE"
 PASSKEY="NONE"
-#This function hadles password entry, which means if the wifi chosen has a passkey then
+#This function handles password entry, which means if the wifi chosen has a passkey then
 #the user must enter the key, else the user does not need to enter the key since there is no need
 function PASSKEYSTATUS {
    for element in "${array[@]}"
@@ -84,7 +84,8 @@ PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
 PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
 printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
-#cat /etc/wpa_supplicant/wpa_supplicant.conf
+
+#Brings up the wlan0 interface to connect to the newly specified access point
 ifup wlan0
 
 fi

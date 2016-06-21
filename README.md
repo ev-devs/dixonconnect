@@ -91,7 +91,7 @@ Current Wi-Fi connection: "EVBosses"
 ##Bugs and pitfalls (make note of these)
 * For the wifi_con.sh I have not tested the flipping between Ethernet and Wi-Fi on the Raspberry Pi. Will do so when I have access to the Raspberry Pi
 
-* Though the script is built to filter out duplicates it is not built to filter out duplicate routers. IF there are multiple routers in one area it will list multiples of the same ESSID. 
+* Though the script is built to filter out duplicates it is not built to filter out duplicate routers. IF there are multiple routers with the same ESSID in one area it will list them all with their respective strengths. 
 Currently working on a fix.
 
 * Recovering ethernet connection after switching from ethernet to Wi-Fi via the wifi_con.sh is not yet configured. To do so would require running "ifconfig eth0 up" which is not in any of the scripts yet.

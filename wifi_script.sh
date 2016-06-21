@@ -23,7 +23,7 @@ fi
 #If there are networks then the WLAN0 variable will not be "" and the if body will be executed
 if [ "$WLAN0" != "" ]
 then
-   printf "Wifi access points registered on wlan0\n"
+   printf "Wi-Fi access points registered on wlan0\n"
    
    W=$(sudo iwlist wlan0 scan | grep 'ESSID\|Quality\|Encryption' | tr '=' 'x') 
    W="${W//Qualityx/=Quality:}"
