@@ -63,6 +63,6 @@ PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
 PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
 printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
-cat /etc/wpa_supplicant/wpa_supplicant.conf
+#cat /etc/wpa_supplicant/wpa_supplicant.conf
 ifup wlan0
 
