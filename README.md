@@ -33,30 +33,30 @@ eth0 = Ethernet Interface one: in simple terms, when referring to eth0 think eth
 
 ###wifi_script.sh
 
-####wlan0
+#####wlan0
 Relating to Wi-Fi the script provide information about wireless local area network connections. Assuming there are Wi-Fi access points available, said access points will be listed, providing the quality
 of the signal and the signal level in db. The higher the quality and signal level the better the connection so be SURE to choose the one with the best connection(for the inquisitive mind, refer to the man pages for [iwconfig](http://linux.die.net/man/8/iwconfig) (A main tool in the script itself) for details on signal link quality).
 The script also reveals whether or not the networks in an area require a passkey. And finally, the names of each connection are also displayed next to the term "ESSID".
 
-####eth0
+#####eth0
 Relating to ethernet, the script will only tell whether or not a link to eth0 is established, meaning it will tell the user if an ethernet connection is available.
 
-####Summary (TL;DR for the lazies)
+#####Summary (TL;DR for the lazies)
 Displays Wi-Fi names and signal strengths. If an ethernet is connected it will tell the user.
 
 ###wifi_con.sh
-####wlan0
+#####wlan0
 Relating to Wi-Fi, the script prompts the user to enter an access point as displayed from the previous script. When done entering the Wi-Fi name, the user should enter the correct password, assuming one is needed. When the correct
 password is entered then given a few seconds, the Wi-Fi network card will be reset and then connected to the chosen network
 
-####eth0
+#####eth0
 Relating to ethernet, this script tells the user that ethernet is used by default and gives them the option to switch between ethernet and Wi-Fi IF they want to.
 
-####Summary (TL;DR for the lazies)
+#####Summary (TL;DR for the lazies)
 Connects the user to the specified access point.
 
 ###**wifi_cur.sh** 
-####wlan0
+#####wlan0
 Relating to Wi-Fi, this script just displays the current connection.
-####eth0
+#####eth0
 Tell if connected to ethernet.
