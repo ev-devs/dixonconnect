@@ -4,8 +4,8 @@ Connect to the wifi using bash scripts. This functionality allows for the user t
 ##Dependencies
 If the use is for Raspberry Pi then all dependencies are met. Otherwise, the functioning OS of the user must meet the following:
 
-1. Unix based OS(preferably Linux, and even better if it is a Debian based disto)
-2. Pre-downloaded WPA Supplicant.
+1. Unix based OS (preferably Linux, and even better if it is a Debian based distro)
+2. Pre-downloaded WPA Supplicant client.
     * The `wifi_con.sh` script writes to the wpa_supplicant.conf file locatedin `/etc/wpa_supplicant/wpa_supplicant.conf`, thus the user NEEDS this file already within.
 
 
@@ -17,10 +17,15 @@ Clone this repo and change the directory to the repo itself. Below are the comma
 `$ cd programmaticWifi`
 
 ##How to run:
-The scripts invoke commands only priveleged users are allowed to un as they access sensitive files on the system. Thus, in order to run the scripts run them with sudo priveleges as such:
+The scripts invoke commands only priveleged users are allowed to run as they access sensitive files on the system. Thus, in order to run the scripts run them with sudo priveleges as such:
 
 `$ sudo ./wifi_script.sh`
 
 `$ sudo ./wifi_con.sh`
 
 ##Fine details (what does it actually do???)
+Great question actually. As stated before, these three scripts are used to provide details and configure the network connections around you. Below are the details and functionality of each:
+
+###wifi_script.sh
+The wifi_script.sh provide information about ethernet and wireless local area network connections. Assuming there are Wi-Fi access point available, the script will list said connections, providing the quality
+of the signal and the signal level in db. The higher the quality and signal level the better the connection (refer to the man pages for [iwconfig](http://linux.die.net/man/8/iwconfig) for details on signal link quality)
