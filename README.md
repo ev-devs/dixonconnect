@@ -44,6 +44,13 @@ Relating to ethernet, the script will only tell whether or not a link to eth0 is
 #####Summary (TL;DR for the lazies)
 Displays Wi-Fi names and signal strengths. If an ethernet is connected it will tell the user.
 
+#####Example run
+```
+$ sudo ./wifi_script.sh
+Ethernet registered on eth0
+
+Wi-Fi access points registered on wlan0
+```
 ###wifi_con.sh
 #####wlan0
 Relating to Wi-Fi, the script prompts the user to enter an access point as displayed from the previous script. When done entering the Wi-Fi name, the user should enter the correct password, assuming one is needed. When the correct
