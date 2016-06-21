@@ -24,8 +24,15 @@ The scripts invoke commands only priveleged users are allowed to run as they acc
 `$ sudo ./wifi_con.sh`
 
 ##Fine details (what does it actually do???)
-Great question actually. As stated before, these three scripts are used to provide details and configure the network connections around you. Below are the details and functionality of each:
+Great question actually. As stated before, these three scripts are used to provide details and configure the network connections around you. Below are the details and functionality of each. Keep in mind the
+following acronyms on our journey through the world of wireless and wired networks
+
+wlan0 = Wireless Local Area Network Interface one
+
+eth0 = Ethernet Interface one
 
 ###wifi_script.sh
+
+####wlan0
 The wifi_script.sh provide information about ethernet and wireless local area network connections. Assuming there are Wi-Fi access point available, the script will list said connections, providing the quality
-of the signal and the signal level in db. The higher the quality and signal level the better the connection (refer to the man pages for [iwconfig](http://linux.die.net/man/8/iwconfig) for details on signal link quality)
+of the signal and the signal level in db. The higher the quality and signal level the better the connection (for the inquisitive mind, refer to the man pages for [iwconfig](http://linux.die.net/man/8/iwconfig) (A main tool in the script itself) for details on signal link quality).
