@@ -3,6 +3,7 @@
 #defines the variables to hold the access points and a password
 CHOICE="NONE"
 PASSKEY="NONE"
+PSK="NONE"
 #This function handles password entry, which means if the wifi chosen has a passkey then
 #the user must enter the key, else the user does not need to enter the key since there is no need
 function PASSKEYSTATUS {
@@ -13,9 +14,7 @@ function PASSKEYSTATUS {
          if [ "$(echo "$element" | grep "\"$CHOICE\"" | grep "on")" != "" ]
          then
 			      echo "Passkey: "
-			      #-s hides the typed characters
-			      read -s PASSKEY
-            echo $PASSKEY
+			      PASSKEY=$PSK
 	       fi
          break
       fi
@@ -63,12 +62,16 @@ WIFICONS=$(echo $WIFICONS)
 IFS=':' read -a array <<< "$WIFICONS"
 #prompts the user to enter a proper SSID
 while [ "$(echo $WIFICONS | grep "$CHOICE")" = "" ]; do
-   read -p "Access point: " CHOICE
+   #read -p "Access point: " CHOICE
+   echo "Access point: "
+   #From command line takes in the name of the selected access point
+   CHOICE=$1
+   #From command line takesin the password
+   PSK=$2
 done
 #Calls the function to handle password entry
-PASSKEYSTATUS array CHOICE
-
-printf "\n"
+PASSKEYSTATUS array CHOICE PSK
+echo $PASSKEY
 #Outputs the contents of the supplicant file to the FILE variable
 FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
 #Replaces the newlines of the output FILE var and gets rid of everything after and including network
