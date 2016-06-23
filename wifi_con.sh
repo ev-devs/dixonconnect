@@ -12,17 +12,12 @@ function PASSKEYSTATUS {
       then
          if [ "$(echo "$element" | grep "\"$CHOICE\"" | grep "on")" != "" ]
          then
-            ANSWER="n"
-            while [ "$ANSWER" = "n" ]; do
-               #prompts for the passkey for the ssid
-			   echo "Passkey: "
-			   #-s hides the typed characters
-			   read -s PASSKEY
-			   echo "Is this correct (y/n): $PASSKEY"
-			   read ANSWER
-			done
-	     fi
-         break 
+			      echo "Passkey: "
+			      #-s hides the typed characters
+			      read -s PASSKEY
+            echo $PASSKEY
+	       fi
+         break
       fi
    done
 }
@@ -35,31 +30,31 @@ ANS="y"
 #Checks to see if there is an ethernet connected. By default ethernet will distribute the connection over Wi-Fi if it is connected.
 ETHLINK=$(ip link show | grep 'eth0' | grep 'state UP')
 #If there is an ethernet connected then do the following
-if [ "$ETHLINK" != "" ] 
+if [ "$ETHLINK" != "" ]
 then
   while [ ANS != "y" -o ANS != "n" ]; do
      printf "Ethernet is default connection. Use wifi? (y/n): "
   done
   #Bring the ethernet interface down if the user wants to use Wi-Fi over ethernet
-  if [ "$ANS" = "y" ] 
+  if [ "$ANS" = "y" ]
   then
      ifconfig eth0 down
   fi
 fi
 #If there is no ethernet  OR if the user would rather use Wi-Fi then execute the following
-if [ "$ANS" = "y" ] 
+if [ "$ANS" = "y" ]
 then
 
 #Get the list of connections, taking only the name and whether or not we need a password. The rest of the commands after the grep are for parsing.
 #the first sed gets rid of the string "Encryption key", the tr makes any : to an x, the next sed gets rid of "ESSIDx"
 #i.e.
 #Encryption key:on ESSID:"Wifi" ->  :on ESSID:"Wifi" -> xon ESSIDx"Wifi" -> xon "Wifi"
-WIFICONS=$(sudo iwlist wlan0 scan | grep 'ESSID\|Encryption' | sed -e 's/\<Encryption\ key\>//g' | tr ':' 'x' | sed -e 's/\<ESSIDx\>//g') 
+WIFICONS=$(sudo iwlist wlan0 scan | grep 'ESSID\|Encryption' | sed -e 's/\<Encryption\ key\>//g' | tr ':' 'x' | sed -e 's/\<ESSIDx\>//g')
 #Replaces any xon with :on
 WIFICONS="${WIFICONS//xon/:on}"
 #Replaces any xoff with :off
 WIFICONS="${WIFICONS//xoff/:off}"
-#Creates the string needed from the original value of WIFICONS 
+#Creates the string needed from the original value of WIFICONS
 #To see what I mean run "${#WIFICONS}" (String length in bash) before the below commands and after it. This will
 #give 576 before and 176 after.
 WIFICONS=$(echo $WIFICONS)
@@ -80,7 +75,7 @@ FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
 PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
 #Writes the new contents of the final
 PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
-#replaces the ~ with \n 
+#replaces the ~ with \n
 PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
 printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
