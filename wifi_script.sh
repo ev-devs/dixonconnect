@@ -1,11 +1,11 @@
 #!/bin/bash
 # Proper header for a Bash script.
 
-#Checks the network links to a given computer. If there is an ethernet connected then the eth0 interface will register as up. 
+#Checks the network links to a given computer. If there is an ethernet connected then the eth0 interface will register as up.
 #Same with wifi where if there is a wifi connection the wlan0 interface will register as up.
 #This is primarily used for ethernet as if there are no direct connections on wlan0 BUT if there are avilable networks
 #then the ip link show will reveal the wlan0 as down which is not good because this is like us saying there are no connections
-#WHEN in fact there very well could be. 
+#WHEN in fact there very well could be.
 LINKS=$(ip link show | grep 'state UP')
 #Defines and sets flags for eth0 and wlan0
 WFLAG="false"
@@ -24,9 +24,9 @@ fi
 if [ "$WLAN0" != "" ]
 then
    printf "Wi-Fi access points registered on wlan0\n"
-   
-   W=$(sudo iwlist wlan0 scan | grep 'ESSID\|Quality\|Encryption' | tr '=' 'x') 
-   W="${W//Qualityx/=Quality:}"
+
+   W=$(sudo iwlist wlan0 scan | grep 'ESSID\|Quality\|Encryption' | tr '=' 'x')
+   W="${W//Qualityx/=^Quality:}"
    W="${W//Signal\ levelx/Signal-level:}"
    #Makes the output of the command a string. Before doing this $W size is 864, after $WIFICONS size is 363
    WIFICONS=$(echo $W)
@@ -40,4 +40,3 @@ then
       echo "$element"
    done
 fi
-
