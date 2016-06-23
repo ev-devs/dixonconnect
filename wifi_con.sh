@@ -13,9 +13,9 @@ function PASSKEYSTATUS {
       then
          if [ "$(echo "$element" | grep "\"$CHOICE\"" | grep "on")" != "" ]
          then
-			      echo "Passkey: "
-			      PASSKEY=$PSK
-	       fi
+           echo "Passkey: "
+           PASSKEY=$PSK
+         fi
          break
       fi
    done
