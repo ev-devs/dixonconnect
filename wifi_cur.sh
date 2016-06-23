@@ -1,14 +1,14 @@
 #!/bin/bash
 LINKS=$(ip link show | grep 'eth0' | grep 'state UP')
-if [ "$LINKS" != "" ] 
+if [ "$LINKS" != "" ]
 then
    echo "Ethernet connected."
 else
    CUR=$(iwgetid | tr ':' 'x' | sed 's/.*ESSIDx//')
-   echo "Current Wi-Fi connection: $CUR"
+   if [ "$CUR" == "" ]
+   then
+      echo "No current connections on wlan0"
+   else
+      echo "Current Wi-Fi connection: $CUR"
+   fi
 fi
-
-
-#cd,config/lxsession/LXDE-pi
-#vim autostart
-#@electron
