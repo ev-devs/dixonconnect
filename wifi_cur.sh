@@ -2,13 +2,13 @@
 LINKS=$(ip link show | grep 'eth0' | grep 'state UP')
 if [ "$LINKS" != "" ]
 then
-   echo "Ethernet connected."
+   echo "ethernet"
 else
    CUR=$(iwgetid | tr ':' 'x' | sed 's/.*ESSIDx//')
    if [ "$CUR" == "" ]
    then
-      echo "No current connections on wlan0"
+      echo "none"
    else
-      echo "Current Wi-Fi connection: $CUR"
+      echo "$CUR"
    fi
 fi
