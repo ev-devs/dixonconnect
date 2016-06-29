@@ -21,7 +21,7 @@ function PASSKEYSTATUS {
    done
 }
 #Brings down the wlan0 interface
-#ifdown wlan0
+ifdown wlan0
 #declares and initalizes the EFLAG
 EFLAG="false"
 #Automatic answer is "y"(yes) just in case an ethernet is not detected
@@ -73,18 +73,18 @@ done
 PASSKEYSTATUS array CHOICE PSK
 echo $PASSKEY
 #Outputs the contents of the supplicant file to the FILE variable
-#FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
+FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
 #Replaces the newlines of the output FILE var and gets rid of everything after and including network
-#PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
+PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
 #Writes the new contents of the final
-#PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
+PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
 #replaces the ~ with \n
-#PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
+PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
-#printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
+printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
 
 #Brings up the wlan0 interface to connect to the newly specified access point
-#ifup wlan0
+ifup wlan0
 CON="$(ip link show | grep "wlan0")"
 echo $CON
 fi
