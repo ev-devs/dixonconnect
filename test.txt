@@ -5,3 +5,10 @@ network={
   ssid = "Flam"
   psk = "Jk"
 }
+
+if [ "$CUR" == "" ]
+then
+   echo "none"
+else
+   echo "$CUR"
+fi
