@@ -1,0 +1,7 @@
+blah blah blah
+other crap here
+
+network={
+  ssid = "Flam"
+  psk = "Jk"
+}
