@@ -23,6 +23,8 @@ function PASSKEYSTATUS {
 
 #declares and initalizes the EFLAG
 EFLAG="false"
+#Brings down the wlan0 interface
+ifdown wlan0
 #Automatic answer is "y"(yes) just in case an ethernet is not detected
 ANS="y"
 #Checks to see if there is an ethernet connected. By default ethernet will distribute the connection over Wi-Fi if it is connected.
@@ -82,8 +84,6 @@ PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
 printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
 
-#Brings down the wlan0 interface
-ifdown wlan0
 #Brings up the wlan0 interface to connect to the newly specified access point
 ifup wlan0
 CON="$(ip link show | grep "wlan0")"
