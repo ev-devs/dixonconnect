@@ -5,8 +5,21 @@ then
    echo "ethernet"
 else
    CUR=$(iwgetid | tr ':' 'x' | sed 's/.*ESSIDx//')
-   while [ "$CUR" == "" ]; do
-      CUR=$(iwgetid | tr ':' 'x' | sed 's/.*ESSIDx//')
-      printf $CUR
-   done
+   if [ $1 == "cur" ]
+   then
+     if [ "$CUR" == "" ]
+     then
+        echo "none"
+     else
+        echo "$CUR"
+     fi
+   else
+   if [ $1 == "con" ]
+   then
+     while [ "$CUR" == "" ]; do
+        CUR=$(iwgetid | tr ':' 'x' | sed 's/.*ESSIDx//')
+        printf $CUR
+     done
+   fi
+ fi
 fi
