@@ -72,7 +72,6 @@ while [ "$(echo $WIFICONS | grep "$CHOICE")" = "" ]; do
 done
 #Calls the function to handle password entry
 PASSKEYSTATUS array CHOICE PSK
-echo $PASSKEY
 #Outputs the contents of the supplicant file to the FILE variable
 FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
 #Replaces the newlines of the output FILE var and gets rid of everything after and including network
@@ -86,6 +85,17 @@ printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
 
 #Brings up the wlan0 interface to connect to the newly specified access point
 ifup wlan0
-CON="$(ip link show | grep "wlan0")"
-echo $CON
+STATUS="SUCCESSFUL"
+STARTTIME=$SECONDS
+TIMEOUT=0
+while [ "$(ip link show | grep "wlan0" | grep "NO-CARRIER")" != "" ]; do 
+
+	if [ "$TIMEOUT" = "15" ]
+	then
+		STATUS="FAILED"
+		break
+	fi
+	TIMEOUT=$(($SECONDS - $STARTTIME))
+done 
+echo $STATUS
 fi
