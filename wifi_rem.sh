@@ -7,3 +7,5 @@ PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
 PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
 printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
+sudo ifdown wlan0
+sudo ifup wlan0
