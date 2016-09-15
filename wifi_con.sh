@@ -24,7 +24,15 @@ function PASSKEYSTATUS {
 #declares and initalizes the EFLAG
 EFLAG="false"
 #Brings down the wlan0 interface
+
+
+
+
 ifdown wlan0
+
+
+
+
 #Automatic answer is "y"(yes) just in case an ethernet is not detected
 ANS="y"
 #Checks to see if there is an ethernet connected. By default ethernet will distribute the connection over Wi-Fi if it is connected.
@@ -73,22 +81,45 @@ done
 #Calls the function to handle password entry
 PASSKEYSTATUS array CHOICE PSK
 #Outputs the contents of the supplicant file to the FILE variable
+
+
+
+
 FILE=$(sudo cat /etc/wpa_supplicant/wpa_supplicant.conf)
+
+
+
+
 #Replaces the newlines of the output FILE var and gets rid of everything after and including network
 PREVCONTENT=$( echo "$FILE" | tr '\n' '~' | sed 's/network.*//' )
+
+PSKMGMT="NULL"
+if [ "$PSK" = "NONE" ]
+then
+  PSKMGMT="key_mgmt=NONE"
+else
+  PSKMGMT="psk=\"$PASSKEY\""
+fi
 #Writes the new contents of the final
-PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   psk=\"$PASSKEY\"~}"
+PREVCONTENT="$PREVCONTENT network={~   ssid=\"$CHOICE\"~   $PSKMGMT~}"
 #replaces the ~ with \n
 PREVCONTENT=$(echo $PREVCONTENT | tr '~' '\n')
 #Outputs to the file thus changes the configurations
+
+
+
+
 printf "$PREVCONTENT" > /etc/wpa_supplicant/wpa_supplicant.conf
+
+
+
 
 #Brings up the wlan0 interface to connect to the newly specified access point
 ifup wlan0
 STATUS="SUCCESSFUL"
 STARTTIME=$SECONDS
 TIMEOUT=0
-while [ "$(ip link show | grep "wlan0" | grep "NO-CARRIER")" != "" ]; do 
+while [ "$(ip link show | grep "wlan0" | grep "NO-CARRIER")" != "" ]; do
 
 	if [ "$TIMEOUT" = "15" ]
 	then
@@ -96,6 +127,6 @@ while [ "$(ip link show | grep "wlan0" | grep "NO-CARRIER")" != "" ]; do
 		break
 	fi
 	TIMEOUT=$(($SECONDS - $STARTTIME))
-done 
+done
 echo $STATUS
 fi
